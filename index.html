@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>শুভ বিবাহ - ডিজিটাল দাওয়াতনামা</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome 6 for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts: Noto Serif Bengali, Amiri, Reem Kufi, Cinzel, Scheherazade New -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@600;700;800&family=Noto+Serif+Bengali:wght@300;400;600;700&family=Reem+Kufi:wght@500;700&family=Scheherazade+New:wght@600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        emeraldDark: '#032218',
+                        emeraldMain: '#094330',
+                        emeraldLight: '#12694b',
+                        goldMain: '#d4af37',
+                        goldLight: '#f9f3d9',
+                        goldDark: '#997412',
+                        goldGlow: '#fff3b0',
+                        maroonMain: '#6b1110',
+                        creamBG: '#fdfbf7',
+                        cardCream: '#fffdf9'
+                    },
+                    fontFamily: {
+                        bengali: ['"Noto Serif Bengali"', 'serif'],
+                        arabic: ['"Scheherazade New"', '"Amiri"', 'serif'],
+                        cinzel: ['"Cinzel"', 'serif'],
+                        kufi: ['"Reem Kufi"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Noto Serif Bengali', serif;
+            background-color: #021710;
+            color: #2c2c2c;
+            overflow-x: hidden;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Gold Foil Shimmer Gradient Effect */
+        .gold-text-gradient {
+            background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa7c11 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-bg-gradient {
+            background: linear-gradient(135deg, #d4af37 0%, #fcf6ba 35%, #b38728 70%, #aa7c11 100%);
+        }
+
+        .gold-border {
+            border-image: linear-gradient(135deg, #bf953f, #fcf6ba, #aa7c11) 1;
+        }
+
+        /* Interactive Envelope Structure */
+        .envelope-wrapper {
+            perspective: 1200px;
+        }
+
+        .envelope {
+            position: relative;
+            width: 320px;
+            height: 220px;
+            background: #6b1110;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.7), inset 0 0 15px rgba(0,0,0,0.5);
+            border-radius: 12px;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+        }
+
+        .envelope::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 160px solid #861817;
+            border-right: 160px solid #861817;
+            border-bottom: 110px solid transparent;
+            border-top: 110px solid #861817;
+            transform-origin: top;
+            transition: transform 0.7s ease-in-out 0.2s;
+            z-index: 3;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+        }
+
+        .envelope.open::before {
+            transform: rotateX(180deg);
+            z-index: 0;
+        }
+
+        .envelope-flap-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-left: 160px solid #540c0b;
+            border-right: 160px solid #540c0b;
+            border-bottom: 110px solid #540c0b;
+            border-top: 110px solid transparent;
+            z-index: 2;
+            border-bottom-left-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+
+        .wax-seal {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #ffe28a 0%, #d4af37 50%, #8a6200 100%);
+            border-radius: 50%;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.5), inset 0 0 10px rgba(255,255,255,0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 4;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            border: 2px solid #fff3b0;
+        }
+
+        .envelope.open .wax-seal {
+            transform: translate(-50%, -50%) scale(0);
+            opacity: 0;
+        }
+
+        /* Continuous Pulse Animations */
+        @keyframes pulseGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(212, 175, 55, 0.4); }
+            50% { box-shadow: 0 0 35px rgba(212, 175, 55, 0.9); }
+        }
+
+        .glow-animation {
+            animation: pulseGlow 2.5s infinite;
+        }
+
+        @keyframes swing {
+            0% { transform: rotate(-6deg); }
+            50% { transform: rotate(6deg); }
+            100% { transform: rotate(-6deg); }
+        }
+
+        .swing-animation {
+            transform-origin: top center;
+            animation: swing 4.5s ease-in-out infinite;
+        }
+
+        /* Modal Dynamics */
+        .modal-backdrop {
+            transition: opacity 0.3s ease-in-out;
+        }
+        
+        .modal-content {
+            transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+        }
+
+        /* Custom Scrollbar for Modal Windows */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f3eedf;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d4af37;
+            border-radius: 4px;
+        }
+
+        /* Flip Card Effect */
+        .perspective-1000 {
+            perspective: 1000px;
+        }
+        .transform-style-3d {
+            transform-style: preserve-3d;
+        }
+        .backface-hidden {
+            backface-visibility: hidden;
+        }
+        .rotate-y-180 {
+            transform: rotateY(180deg);
+        }
+
+        /* Background Islamic Geometric Pattern */
+        .bg-islamic-pattern {
+            background-color: #032218;
+            background-image: radial-gradient(#d4af37 0.75px, transparent 0.75px), radial-gradient(#d4af37 0.75px, #032218 0.75px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            opacity: 0.95;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-0 md:p-4 bg-emeraldDark">
+
+    <!-- Mobile Screen Simulator Container -->
+    <div id="appContainer" class="w-full max-w-md min-h-screen md:min-h-[850px] md:max-h-[920px] bg-creamBG md:rounded-3xl shadow-2xl relative overflow-hidden flex flex-col justify-between border-0 md:border-4 border-goldMain">
+        
+        <!-- Background Decorative Pattern Layer -->
+        <div class="absolute inset-0 opacity-5 pointer-events-none bg-[radial-gradient(#d4af37_1px,transparent_1px)] [background-size:16px_16px]"></div>
+
+        <!-- Top Right Floating Audio Controller Button -->
+        <button id="audioToggle" onclick="toggleAudio()" class="absolute top-4 right-4 z-40 w-11 h-11 rounded-full bg-emeraldDark/85 border-2 border-goldMain text-goldMain flex items-center justify-center shadow-xl transition transform active:scale-95" title="সংগীত অন/অফ">
+            <i id="audioIcon" class="fas fa-volume-xmark text-base"></i>
+        </button>
+
+        <!-- DYNAMIC CONTENT SCREENS CONTAINER -->
+        <div class="relative w-full h-full flex-1 flex flex-col">
+
+            <!-- SCREEN 1: ENVELOPE / COVER PAGE SCREEN -->
+            <div id="envelopeScreen" class="absolute inset-0 z-30 bg-gradient-to-b from-emeraldDark via-emeraldMain to-emeraldDark flex flex-col items-center justify-between p-6 transition-all duration-700">
+                
+                <!-- Top Islamic Fanous Lantern & Calligraphy -->
+                <div class="w-full text-center pt-4">
+                    <div class="swing-animation inline-block mb-1">
+                        <i class="fa-solid fa-fanous text-4xl text-goldMain"></i>
+                    </div>
+                    
+                    <!-- SVG Calligraphy: Bismillah ar-Rahman ar-Rahim -->
+                    <div class="my-2 flex justify-center">
+                        <svg class="w-64 h-16 text-goldMain fill-current" viewBox="0 0 500 100" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M250,15 C265,15 275,25 285,15 C300,30 320,10 340,20 C360,10 380,30 400,15 C410,25 430,15 450,25 C460,10 480,20 490,15 M250,15 C235,15 225,25 215,15 C200,30 180,10 160,20 C140,10 120,30 100,15 C90,25 70,15 50,25 C40,10 20,20 10,15" stroke="#d4af37" stroke-width="2" fill="none"/>
+                            <text x="50%" y="60%" dominant-baseline="middle" text-anchor="middle" font-family="'Scheherazade New', 'Amiri', serif" font-size="34" font-weight="bold" fill="#fcf6ba">
+                                بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
+                            </text>
+                        </svg>
+                    </div>
+
+                    <p class="text-[11px] text-goldMain tracking-widest uppercase font-cinzel">DIGITAL INVITATION</p>
+                </div>
+
+                <!-- Interactive Envelope Component -->
+                <div class="my-auto flex flex-col items-center">
+                    <div id="interactiveEnvelope" onclick="openEnvelope()" class="envelope glow-animation flex items-center justify-center">
+                        <div class="envelope-flap-bottom"></div>
+                        
+                        <!-- Wax Seal with Bengali Calligraphy Style Wax Seal Stamp -->
+                        <div class="wax-seal">
+                            <div class="text-center">
+                                <i class="fa-solid fa-envelope-open-text text-emeraldDark text-xl mb-0.5"></i>
+                                <span class="block text-[10px] font-bold text-emeraldDark tracking-wider font-bengali">খুলুন</span>
+                            </div>
+                        </div>
+
+                        <!-- Envelope Banner Text -->
+                        <div class="absolute bottom-5 text-center z-10 w-full px-4">
+                            <h2 class="text-2xl font-bold text-goldLight drop-shadow-md font-bengali">বিয়ের দাওয়াতনামা</h2>
+                            <p class="text-xs text-goldLight/80 font-bengali mt-0.5">সবান্ধব আমন্ত্রিত</p>
+                        </div>
+                    </div>
+
+                    <p class="text-goldLight/90 text-sm mt-8 animate-pulse font-bengali flex items-center gap-2 bg-emeraldDark/60 px-4 py-1.5 rounded-full border border-goldMain/30">
+                        <i class="fa-solid fa-hand-pointer text-goldMain"></i> চিঠিতে স্পর্শ করে কার্ডটি উন্মুক্ত করুন
+                    </p>
+                </div>
+
+                <!-- Footer Family Tagline -->
+                <div class="text-center pb-3 text-goldMain/80 text-xs">
+                    <p class="font-bengali">Developer: Imtiaj Ahmed 💕</p>
+                </div>
+            </div>
+
+            <!-- SCREEN 2: MAIN DASHBOARD SCREEN (Initially Hidden behind Envelope) -->
+            <div id="dashboardScreen" class="w-full h-full flex-1 flex flex-col justify-between p-4 overflow-y-auto hidden opacity-0 transition-opacity duration-700 bg-creamBG">
+                
+                <!-- Header with Bismillah Calligraphy Banner -->
+                <div class="text-center pt-2 pb-3 border-b-2 border-goldMain/40 relative">
+                    <!-- Mosque Minaret Icons -->
+                    <div class="absolute top-1 left-1 text-goldDark/50 text-xl"><i class="fa-solid fa-kaaba"></i></div>
+                    <div class="absolute top-1 right-1 text-goldDark/50 text-xl"><i class="fa-solid fa-mosque"></i></div>
+                    
+                    <h3 class="font-arabic text-3xl gold-text-gradient font-bold leading-relaxed drop-shadow-sm">بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</h3>
+                    <p class="text-xs text-emeraldMain font-semibold mt-0.5">"পরম করুণাময় ও অসীম দয়ালু আল্লাহর নামে শুরু করছি"</p>
+                </div>
+
+                <!-- Quran Verse Card (Surah Ar-Rum 30:21) -->
+                <div class="my-3 p-3.5 bg-cardCream rounded-2xl border border-goldMain/50 shadow-sm text-center relative overflow-hidden">
+                    <div class="absolute -right-5 -bottom-5 text-goldMain/15 text-7xl"><i class="fa-solid fa-quran"></i></div>
+                    
+                    <!-- Calligraphic Quran Badge -->
+                    <span class="inline-block px-3 py-0.5 bg-emeraldMain text-goldLight text-[11px] font-bold rounded-full mb-2 border border-goldMain/40 font-arabic">
+                        وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا
+                    </span>
+
+                    <p class="text-xs text-emeraldDark italic font-bengali leading-relaxed px-1">
+                        "এবং তাঁর নিদর্শনাবলীর মধ্যে রয়েছে যে, তিনি তোমাদের জন্য তোমাদের মধ্য হতে সঙ্গিনীদের সৃষ্টি করেছেন যাতে তোমরা তাদের নিকট প্রশান্তি পাও এবং তিনি তোমাদের মধ্যে পারস্পরিক ভালোবাসা ও দয়া সৃষ্টি করেছেন।"
+                    </p>
+                    <span class="inline-block mt-2 text-[10px] font-bold text-goldDark bg-goldLight/60 px-3 py-0.5 rounded-full border border-goldMain/30">— সূরা আর-রূম (৩০:২১)</span>
+                </div>
+
+                <!-- Save The Date & Couple Headline Banner -->
+                <div class="text-center my-2 py-3 bg-gradient-to-r from-emeraldDark via-emeraldMain to-emeraldDark text-goldLight rounded-2xl shadow-lg border-2 border-goldMain relative overflow-hidden">
+                    <div class="text-[10px] uppercase tracking-widest text-goldMain font-cinzel font-bold">Save Our Special Date</div>
+                    
+                    <!-- Couple Names in Bengali Calligraphy Style -->
+                    <h1 class="text-2xl font-bold font-bengali text-goldGlow my-1 flex items-center justify-center gap-2">
+                        মাহমুদুল <span class="font-arabic text-goldMain text-2xl">ﷺ</span> ফাতিমা
+                    </h1>
+                    
+                    <div class="flex items-center justify-center gap-2 text-xs font-bengali text-goldLight">
+                        <span><i class="fa-regular fa-calendar-check text-goldMain"></i> শুক্রবার, ২৪ মে, ২০২৮</span>
+                        <span>•</span>
+                        <span><i class="fa-solid fa-clock text-goldMain"></i> দুপুর ১:৩০ মি:</span>
+                    </div>
+
+                    <!-- Google Calendar Add Event Button -->
+                    <div class="mt-2.5">
+                        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Marriage+of+Mahmudul+%26+Fatima&dates=20280524T073000Z/20280524T120000Z&details=You+are+cordially+invited+to+attend+the+wedding+ceremony.&location=Galaxy+Convention+Center,+Dhanmondi,+Dhaka" target="_blank" class="inline-flex items-center gap-1.5 text-[10px] font-bold bg-goldMain hover:bg-goldDark text-emeraldDark px-3 py-1 rounded-full shadow transition transform active:scale-95">
+                            <i class="fa-solid fa-calendar-plus"></i> গুগল ক্যালেন্ডারে যোগ করুন
+                        </a>
+                    </div>
+                </div>
+
+                <!-- REAL-TIME COUNTDOWN TIMER -->
+                <div class="my-2 p-3 bg-white/90 rounded-2xl border-2 border-goldMain shadow-md">
+                    <div class="text-center mb-2">
+                        <span class="text-xs font-bold text-emeraldDark uppercase tracking-wider font-bengali flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-hourglass-half text-goldMain animate-spin"></i> পবিত্র বন্ধনের আর বাকি মাত্র
+                        </span>
+                    </div>
+                    
+                    <div class="grid grid-cols-4 gap-2 text-center">
+                        <div class="bg-gradient-to-b from-emeraldMain to-emeraldDark text-goldLight p-2 rounded-xl border border-goldMain/40 shadow">
+                            <span id="timerDays" class="block text-xl font-bold font-cinzel text-goldGlow">00</span>
+                            <span class="text-[10px] text-goldLight/80 font-bengali">দিন</span>
+                        </div>
+                        <div class="bg-gradient-to-b from-emeraldMain to-emeraldDark text-goldLight p-2 rounded-xl border border-goldMain/40 shadow">
+                            <span id="timerHours" class="block text-xl font-bold font-cinzel text-goldGlow">00</span>
+                            <span class="text-[10px] text-goldLight/80 font-bengali">ঘণ্টা</span>
+                        </div>
+                        <div class="bg-gradient-to-b from-emeraldMain to-emeraldDark text-goldLight p-2 rounded-xl border border-goldMain/40 shadow">
+                            <span id="timerMinutes" class="block text-xl font-bold font-cinzel text-goldGlow">00</span>
+                            <span class="text-[10px] text-goldLight/80 font-bengali">মিনিট</span>
+                        </div>
+                        <div class="bg-gradient-to-b from-emeraldMain to-emeraldDark text-goldLight p-2 rounded-xl border border-goldMain/40 shadow">
+                            <span id="timerSeconds" class="block text-xl font-bold font-cinzel text-goldGlow">00</span>
+                            <span class="text-[10px] text-goldLight/80 font-bengali">সেকেন্ড</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- INTERACTIVE NAVIGATION BUTTONS GRID -->
+                <div class="grid grid-cols-2 gap-2.5 my-2">
+                    
+                    <!-- Button 1: Bride & Groom Profile -->
+                    <button onclick="openModal('profileModal')" class="bg-cardCream hover:bg-goldLight/40 border-2 border-goldMain/60 rounded-xl p-3 flex flex-col items-center justify-center shadow-sm transition transform active:scale-95 group relative overflow-hidden">
+                        <div class="w-10 h-10 rounded-full bg-emeraldMain text-goldMain flex items-center justify-center text-lg mb-1 group-hover:scale-110 transition shadow">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <span class="text-xs font-bold text-emeraldDark font-bengali">আমাদের পরিচয়</span>
+                        <span class="text-[9px] text-gray-500 font-bengali">বর ও কনের পরিচিতি</span>
+                    </button>
+
+                    <!-- Button 2: Formal Invitation Text -->
+                    <button onclick="openModal('invitationModal')" class="bg-cardCream hover:bg-goldLight/40 border-2 border-goldMain/60 rounded-xl p-3 flex flex-col items-center justify-center shadow-sm transition transform active:scale-95 group relative overflow-hidden">
+                        <div class="w-10 h-10 rounded-full bg-emeraldMain text-goldMain flex items-center justify-center text-lg mb-1 group-hover:scale-110 transition shadow">
+                            <i class="fa-solid fa-scroll"></i>
+                        </div>
+                        <span class="text-xs font-bold text-emeraldDark font-bengali">আমন্ত্রণপত্র</span>
+                        <span class="text-[9px] text-gray-500 font-bengali">মূল চিঠি ও বার্তা</span>
+                    </button>
+
+                    <!-- Button 3: Events & Schedule -->
+                    <button onclick="openModal('scheduleModal')" class="bg-cardCream hover:bg-goldLight/40 border-2 border-goldMain/60 rounded-xl p-3 flex flex-col items-center justify-center shadow-sm transition transform active:scale-95 group relative overflow-hidden">
+                        <div class="w-10 h-10 rounded-full bg-emeraldMain text-goldMain flex items-center justify-center text-lg mb-1 group-hover:scale-110 transition shadow">
+                            <i class="fa-solid fa-calendar-days"></i>
+                        </div>
+                        <span class="text-xs font-bold text-emeraldDark font-bengali">সময়সূচি ও পর্ব</span>
+                        <span class="text-[9px] text-gray-500 font-bengali">আকদ ও ওয়ালিমা</span>
+                    </button>
+
+                    <!-- Button 4: Venue & Maps -->
+                    <button onclick="openModal('locationModal')" class="bg-cardCream hover:bg-goldLight/40 border-2 border-goldMain/60 rounded-xl p-3 flex flex-col items-center justify-center shadow-sm transition transform active:scale-95 group relative overflow-hidden">
+                        <div class="w-10 h-10 rounded-full bg-emeraldMain text-goldMain flex items-center justify-center text-lg mb-1 group-hover:scale-110 transition shadow">
+                            <i class="fa-solid fa-map-location-dot"></i>
+                        </div>
+                        <span class="text-xs font-bold text-emeraldDark font-bengali">ভেন্যু ও লোকেশন</span>
+                        <span class="text-[9px] text-gray-500 font-bengali">গুগল ম্যাপস দিকনির্দেশনা</span>
+                    </button>
+
+                    <!-- Button 5: RSVP Attendance Confirmation -->
+                    <button onclick="openModal('rsvpModal')" class="bg-cardCream hover:bg-goldLight/40 border-2 border-goldMain/60 rounded-xl p-3 flex flex-col items-center justify-center shadow-sm transition transform active:scale-95 group relative overflow-hidden">
+                        <div class="w-10 h-10 rounded-full bg-emeraldMain text-goldMain flex items-center justify-center text-lg mb-1 group-hover:scale-110 transition shadow">
+                            <i class="fa-solid fa-clipboard-check"></i>
+                        </div>
+                        <span class="text-xs font-bold text-emeraldDark font-bengali">উপস্থিতি নিশ্চিতকরণ</span>
+                        <span class="text-[9px] text-gray-500 font-bengali">RSVP জমা দিন</span>
+                    </button>
+
+                    <!-- Button 6: Blessing Wall / Guest Book -->
+                    <button onclick="openModal('blessingsModal')" class="bg-cardCream hover:bg-goldLight/40 border-2 border-goldMain/60 rounded-xl p-3 flex flex-col items-center justify-center shadow-sm transition transform active:scale-95 group relative overflow-hidden">
+                        <div class="w-10 h-10 rounded-full bg-emeraldMain text-goldMain flex items-center justify-center text-lg mb-1 group-hover:scale-110 transition shadow">
+                            <i class="fa-solid fa-hands-praying"></i>
+                        </div>
+                        <span class="text-xs font-bold text-emeraldDark font-bengali">শুভকামনা বোর্ড</span>
+                        <span class="text-[9px] text-gray-500 font-bengali">নেক দো'আ লিখুন</span>
+                    </button>
+
+                </div>
+
+                <!-- Footer Family Blessing Text -->
+                <div class="mt-auto pt-2 text-center border-t border-goldMain/30">
+                    <p class="text-xs text-emeraldDark font-bengali font-bold">
+                        আকাঙ্ক্ষায়: রফিকুল ইসলাম ও চৌধুরী পরিবার
+                    </p>
+                    <p class="text-[10px] text-gray-600 font-bengali">আপনার উপস্থিতি ও নেক দো'আ আমাদের কাম্য</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- MODALS / POPUP DETAILS CONTAINERS -->
+
+        <!-- MODAL 1: Bride & Groom Flip Card Profile (আমাদের পরিচয়) -->
+        <div id="profileModal" class="modal-backdrop fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none">
+            <div class="modal-content bg-creamBG w-full max-w-sm rounded-2xl border-2 border-goldMain p-5 shadow-2xl relative max-h-[85vh] overflow-y-auto transform scale-95">
+                
+                <button onclick="closeModal('profileModal')" class="absolute top-3 right-3 w-8 h-8 bg-emeraldMain text-goldLight rounded-full flex items-center justify-center hover:bg-maroonMain transition shadow z-10">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+                <!-- Calligraphy Modal Title -->
+                <div class="text-center mb-4">
+                    <div class="font-arabic text-2xl gold-text-gradient font-bold">معرفة العروسين</div>
+                    <h3 class="text-lg font-bold text-emeraldDark font-bengali">বর ও কনের পরিচয়</h3>
+                    <div class="w-16 h-0.5 bg-goldMain mx-auto mt-1"></div>
+                </div>
+
+                <!-- Groom Details Card -->
+                <div class="bg-cardCream p-4 rounded-xl border border-goldMain/50 mb-3 shadow-sm relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-emeraldMain text-goldLight text-[10px] font-bold px-3 py-0.5 rounded-bl-lg font-bengali border-b border-l border-goldMain">বর পক্ষ</div>
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="w-11 h-11 rounded-full bg-emeraldDark text-goldMain flex items-center justify-center font-bold text-xl border border-goldMain">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-emeraldMain text-base font-bengali">মাহমুদুল হাসান</h4>
+                            <p class="text-[11px] text-gray-600 font-bengali">সফটওয়্যার ইঞ্জিনিয়ার (M.Sc, BUET)</p>
+                        </div>
+                    </div>
+                    <div class="text-xs text-gray-700 font-bengali space-y-1.5 pl-2 border-l-2 border-goldMain/60">
+                        <p><span class="font-semibold text-emeraldDark">পিতা:</span> আলহাজ্ব মোঃ সাইফুর রহমান</p>
+                        <p><span class="font-semibold text-emeraldDark">মাতা:</span> বেগম রোকেয়া রহমান</p>
+                        <p><span class="font-semibold text-emeraldDark">ঠিকানা:</span> ধানমন্ডি, ঢাকা</p>
+                    </div>
+                </div>
+
+                <!-- Heart Islamic Calligraphy Divider -->
+                <div class="text-center my-2 text-goldDark flex items-center justify-center gap-2">
+                    <span class="w-12 h-px bg-goldMain/40"></span>
+                    <i class="fa-solid fa-heart text-goldMain text-xs animate-bounce"></i>
+                    <span class="w-12 h-px bg-goldMain/40"></span>
+                </div>
+
+                <!-- Bride Details Card -->
+                <div class="bg-cardCream p-4 rounded-xl border border-goldMain/50 shadow-sm relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-emeraldMain text-goldLight text-[10px] font-bold px-3 py-0.5 rounded-bl-lg font-bengali border-b border-l border-goldMain">কনে পক্ষ</div>
+                    <div class="flex items-center gap-3 mb-2">
+                        <div class="w-11 h-11 rounded-full bg-emeraldDark text-goldMain flex items-center justify-center font-bold text-xl border border-goldMain">
+                            <i class="fa-solid fa-user-nurse"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-emeraldMain text-base font-bengali">ফাতিমা জাহরা</h4>
+                            <p class="text-[11px] text-gray-600 font-bengali">লেকচারার (পদার্থবিজ্ঞান, ঢাকা বিশ্ববিদ্যালয়)</p>
+                        </div>
+                    </div>
+                    <div class="text-xs text-gray-700 font-bengali space-y-1.5 pl-2 border-l-2 border-goldMain/60">
+                        <p><span class="font-semibold text-emeraldDark">পিতা:</span> মোঃ রফিকুল ইসলাম</p>
+                        <p><span class="font-semibold text-emeraldDark">মাতা:</span> মোসাম্মাৎ সুলতানা পারভীন</p>
+                        <p><span class="font-semibold text-emeraldDark">ঠিকানা:</span> সেক্টর # ৭, উত্তরা, ঢাকা</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- MODAL 2: Formal Invitation Message (আমন্ত্রণপত্র) -->
+        <div id="invitationModal" class="modal-backdrop fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none">
+            <div class="modal-content bg-creamBG w-full max-w-sm rounded-2xl border-2 border-goldMain p-5 shadow-2xl relative max-h-[85vh] overflow-y-auto transform scale-95 text-center">
+                
+                <button onclick="closeModal('invitationModal')" class="absolute top-3 right-3 w-8 h-8 bg-emeraldMain text-goldLight rounded-full flex items-center justify-center hover:bg-maroonMain transition shadow z-10">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+                <div class="mb-3">
+                    <div class="font-arabic text-2xl gold-text-gradient font-bold">دعوة زفاف</div>
+                    <h3 class="text-lg font-bold text-emeraldDark font-bengali">সবান্ধব নিমন্ত্রণ</h3>
+                    <p class="font-arabic text-goldDark text-sm font-semibold">السلام عليكم ورحمة الله وبركاته</p>
+                </div>
+
+                <div class="text-xs font-bengali text-gray-800 leading-relaxed space-y-3 bg-cardCream p-4 rounded-xl border border-goldMain/40 text-justify shadow-inner">
+                    <p class="font-bold text-emeraldDark">
+                        সম্মানিত সুধী,
+                    </p>
+                    <p>
+                        আল্লাহ্ তায়ালার অশেষ রহমতে ও দয়ায় আমাদের একমাত্র কন্যা <span class="font-bold text-emeraldMain">ফাতিমা জাহরা</span>-এর সাথে <span class="font-bold text-emeraldMain">মাহমুদুল হাসান</span>-এর শুভ বিবাহ অনুষ্ঠিত হতে যাচ্ছে, ইনশাআল্লাহ্।
+                    </p>
+                    <p>
+                        এই আনন্দঘন সুমুহূর্তে আমাদের পরিবারের পক্ষ থেকে আপনাকে ও আপনার পরিবারকে সপরিবারে আমন্ত্রন জানাচ্ছি। নবদম্পতির ভবিষ্যৎ দাম্পত্য জীবন যেন সুখ, সমৃদ্ধি ও বরকতময় হয়, সেজন্য আপনাদের উপস্থিতি ও নেক দো'আ একান্ত কাম্য।
+                    </p>
+                </div>
+
+                <div class="mt-4 pt-2 border-t border-goldMain/30">
+                    <p class="text-xs font-bold text-emeraldDark font-bengali">বিনীত নিবেদক</p>
+                    <p class="text-xs text-gray-700 font-bengali">মোঃ রফিকুল ইসলাম ও পরিবার</p>
+                    <p class="text-[10px] text-goldDark mt-1"><i class="fa-solid fa-phone"></i> যোগাযোগ: +৮৮০ ১৭১২-৩৪৫৬৭৮</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- MODAL 3: Events Schedule Timeline (সময়সূচি ও পর্ব) -->
+        <div id="scheduleModal" class="modal-backdrop fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none">
+            <div class="modal-content bg-creamBG w-full max-w-sm rounded-2xl border-2 border-goldMain p-5 shadow-2xl relative max-h-[85vh] overflow-y-auto transform scale-95">
+                
+                <button onclick="closeModal('scheduleModal')" class="absolute top-3 right-3 w-8 h-8 bg-emeraldMain text-goldLight rounded-full flex items-center justify-center hover:bg-maroonMain transition shadow z-10">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+                <div class="text-center mb-4">
+                    <div class="font-arabic text-2xl gold-text-gradient font-bold">جدول الحفل</div>
+                    <h3 class="text-lg font-bold text-emeraldDark font-bengali">অনুষ্ঠান সময়সূচি</h3>
+                    <div class="w-16 h-0.5 bg-goldMain mx-auto mt-1"></div>
+                </div>
+
+                <div class="space-y-3 font-bengali">
+                    
+                    <!-- Event 1: Holud / Mehendi -->
+                    <div class="bg-cardCream p-3.5 rounded-xl border-l-4 border-amber-500 border-t border-r border-b border-goldMain/30 shadow-sm flex items-start gap-3">
+                        <div class="w-9 h-9 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center text-base shrink-0 mt-0.5">
+                            <i class="fa-solid fa-hand-sparkles"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-emeraldDark text-sm">মেহেদি ও হলুদ সন্ধ্যা</h4>
+                            <p class="text-xs text-goldDark font-semibold"><i class="fa-regular fa-calendar"></i> ২৩ মে, ২০২৮ (বৃহস্পতিবার)</p>
+                            <p class="text-xs text-gray-600"><i class="fa-regular fa-clock"></i> সন্ধ্যা ৭:০০ ঘটিকায়</p>
+                            <span class="inline-block text-[9px] bg-amber-100 text-amber-800 px-2 py-0.5 rounded mt-1">ড্রেসকোড: বাসন্তী / হলুদ</span>
+                        </div>
+                    </div>
+
+                    <!-- Event 2: Akd / Marriage -->
+                    <div class="bg-cardCream p-3.5 rounded-xl border-l-4 border-emeraldMain border-t border-r border-b border-goldMain/30 shadow-sm flex items-start gap-3">
+                        <div class="w-9 h-9 rounded-full bg-emerald-100 text-emeraldMain flex items-center justify-center text-base shrink-0 mt-0.5">
+                            <i class="fa-solid fa-mosque"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-emeraldDark text-sm">শুভ আকদ ও বরযাত্রী আপ্যায়ন</h4>
+                            <p class="text-xs text-goldDark font-semibold"><i class="fa-regular fa-calendar"></i> ২৪ মে, ২০২৮ (শুক্রবার)</p>
+                            <p class="text-xs text-gray-600"><i class="fa-regular fa-clock"></i> দুপুর ১:৩০ মি: (জোহরের পর)</p>
+                            <span class="inline-block text-[9px] bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded mt-1">স্থান: গ্যালাক্সি কনভেনশন সেন্টার</span>
+                        </div>
+                    </div>
+
+                    <!-- Event 3: Walima -->
+                    <div class="bg-cardCream p-3.5 rounded-xl border-l-4 border-goldMain border-t border-r border-b border-goldMain/30 shadow-sm flex items-start gap-3">
+                        <div class="w-9 h-9 rounded-full bg-goldLight text-goldDark flex items-center justify-center text-base shrink-0 mt-0.5">
+                            <i class="fa-solid fa-utensils"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-emeraldDark text-sm">শুভ ওয়ালিমা (বৌভাত)</h4>
+                            <p class="text-xs text-goldDark font-semibold"><i class="fa-regular fa-calendar"></i> ২৫ মে, ২০২৮ (শনিবার)</p>
+                            <p class="text-xs text-gray-600"><i class="fa-regular fa-clock"></i> রাত ৭:৩০ মি: থেকে</p>
+                            <span class="inline-block text-[9px] bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded mt-1">স্থান: সেনাকুঞ্জ, ঢাকা কন্টনমেন্ট</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <!-- MODAL 4: Venue & Maps (ভেন্যু ও লোকেশন) -->
+        <div id="locationModal" class="modal-backdrop fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none">
+            <div class="modal-content bg-creamBG w-full max-w-sm rounded-2xl border-2 border-goldMain p-5 shadow-2xl relative max-h-[85vh] overflow-y-auto transform scale-95">
+                
+                <button onclick="closeModal('locationModal')" class="absolute top-3 right-3 w-8 h-8 bg-emeraldMain text-goldLight rounded-full flex items-center justify-center hover:bg-maroonMain transition shadow z-10">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+                <div class="text-center mb-3">
+                    <div class="font-arabic text-2xl gold-text-gradient font-bold">موقع الحفل</div>
+                    <h3 class="text-lg font-bold text-emeraldDark font-bengali">ভেন্যু ও লোকেশন</h3>
+                    <div class="w-16 h-0.5 bg-goldMain mx-auto mt-1"></div>
+                </div>
+
+                <div class="bg-cardCream p-4 rounded-xl border border-goldMain/40 mb-3 text-center font-bengali shadow-sm">
+                    <h4 class="font-bold text-emeraldMain text-base mb-0.5">গ্যালাক্সি কনভেনশন সেন্টার</h4>
+                    <p class="text-xs text-goldDark font-bold mb-1.5"><i class="fa-solid fa-building border border-goldMain rounded-full p-1 text-[10px]"></i> হল নম্বর: ০২ (লেভেল-৩)</p>
+                    <p class="text-xs text-gray-700 leading-normal">
+                        প্লট # ১২, রোড # ২৭ (পুরাতন), ধানমন্ডি আবাসিক এলাকা, ঢাকা-১২০৯।
+                    </p>
+                </div>
+
+                <!-- Interactive Map Graphics Box -->
+                <div class="bg-emeraldDark/10 h-36 rounded-xl flex flex-col items-center justify-center relative overflow-hidden border border-goldMain/40 mb-3 shadow-inner">
+                    <div class="absolute inset-0 bg-cover bg-center opacity-40" style="background-image: url('https://placehold.co/600x300/0b4d36/ffffff?text=Galaxy+Convention+Center+Map');"></div>
+                    <div class="relative z-10 text-center p-3 bg-emeraldDark/80 rounded-xl border border-goldMain/50 backdrop-blur-xs">
+                        <i class="fa-solid fa-location-dot text-3xl text-goldMain animate-bounce"></i>
+                        <span class="block text-xs font-bold text-goldLight font-bengali mt-1">ধানমন্ডি ২৭, ঢাকা</span>
+                    </div>
+                </div>
+
+                <!-- Direct Google Maps Navigation Button -->
+                <a href="https://maps.google.com/?q=Galaxy+Convention+Center+Dhanmondi+Dhaka" target="_blank" rel="noopener noreferrer" class="w-full bg-emeraldMain hover:bg-emeraldDark text-goldLight py-3 rounded-xl font-bold font-bengali flex items-center justify-center gap-2 shadow-md transition transform active:scale-95 text-xs border border-goldMain">
+                    <i class="fa-solid fa-diamond-turn-right text-goldMain text-sm"></i> গুগল ম্যাপসে সরাসরি পথ দেখুন
+                </a>
+
+            </div>
+        </div>
+
+        <!-- MODAL 5: RSVP Attendance Confirmation (উপস্থিতি নিশ্চিতকরণ) -->
+        <div id="rsvpModal" class="modal-backdrop fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none">
+            <div class="modal-content bg-creamBG w-full max-w-sm rounded-2xl border-2 border-goldMain p-5 shadow-2xl relative max-h-[85vh] overflow-y-auto transform scale-95">
+                
+                <button onclick="closeModal('rsvpModal')" class="absolute top-3 right-3 w-8 h-8 bg-emeraldMain text-goldLight rounded-full flex items-center justify-center hover:bg-maroonMain transition shadow z-10">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+                <div class="text-center mb-3">
+                    <div class="font-arabic text-2xl gold-text-gradient font-bold">تأكيد الحضور</div>
+                    <h3 class="text-lg font-bold text-emeraldDark font-bengali">উপস্থিতি নিশ্চিতকরণ</h3>
+                    <p class="text-xs text-gray-600 font-bengali mt-0.5">অনুগ্রহ করে আপনার উপস্থিতি নিশ্চিত করুন</p>
+                </div>
+
+                <form id="rsvpForm" onsubmit="handleRSVPSubmit(event)" class="space-y-3 font-bengali text-xs">
+                    <div>
+                        <label class="block font-bold text-emeraldDark mb-1">আপনার নাম *</label>
+                        <input type="text" id="guestName" required placeholder="যেমন: আলহাজ্ব মোঃ জহিরুল ইসলাম" class="w-full px-3 py-2 bg-cardCream border border-goldMain/50 rounded-lg focus:outline-none focus:border-emeraldMain">
+                    </div>
+
+                    <div>
+                        <label class="block font-bold text-emeraldDark mb-1">মোট অতিথি সংখ্যা (আপনারসহ)</label>
+                        <select id="guestCount" class="w-full px-3 py-2 bg-cardCream border border-goldMain/50 rounded-lg focus:outline-none focus:border-emeraldMain">
+                            <option value="1">১ জন</option>
+                            <option value="2">২ জন (সপরিবারে)</option>
+                            <option value="3">৩ জন</option>
+                            <option value="4">৪ জন বা ততোধিক</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block font-bold text-emeraldDark mb-1">উপস্থিতি স্থিতি *</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <label class="flex items-center gap-1.5 p-2 bg-cardCream border border-goldMain/40 rounded-lg cursor-pointer">
+                                <input type="radio" name="attendance" value="উপস্থিত থাকবো" checked class="text-emeraldMain">
+                                <span>ইনশাআল্লাহ্ আসবো</span>
+                            </label>
+                            <label class="flex items-center gap-1.5 p-2 bg-cardCream border border-goldMain/40 rounded-lg cursor-pointer">
+                                <input type="radio" name="attendance" value="আসতে পারছি না" class="text-emeraldMain">
+                                <span>আসতে পারছি না</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block font-bold text-emeraldDark mb-1">নবদম্পতির জন্য দো'আ / বার্তা</label>
+                        <textarea id="guestPrayer" rows="2" placeholder="আল্লাহ্ আপনাদের দাম্পত্য জীবনে বরকত দান করুন..." class="w-full px-3 py-2 bg-cardCream border border-goldMain/50 rounded-lg focus:outline-none focus:border-emeraldMain"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-emeraldMain hover:bg-emeraldDark text-goldLight py-2.5 rounded-xl font-bold font-bengali flex items-center justify-center gap-2 shadow transition transform active:scale-95 border border-goldMain">
+                        <i class="fa-solid fa-paper-plane text-goldMain"></i> নিশ্চিত করুন
+                    </button>
+                </form>
+
+                <div id="rsvpSuccessMsg" class="hidden text-center p-4 bg-emerald-50 rounded-xl border border-emeraldMain text-emeraldDark font-bengali mt-2">
+                    <i class="fa-solid fa-circle-check text-2xl text-emeraldMain mb-1"></i>
+                    <p class="font-bold text-sm">জাজাকাল্লাহু খাইরান!</p>
+                    <p class="text-xs mt-1">আপনার উপস্থিতি নিশ্চিতকরণ সফলভাবে গ্রহণ করা হয়েছে।</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- MODAL 6: Blessing Wall / Guest Book (শুভকামনা বোর্ড) -->
+        <div id="blessingsModal" class="modal-backdrop fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none">
+            <div class="modal-content bg-creamBG w-full max-w-sm rounded-2xl border-2 border-goldMain p-5 shadow-2xl relative max-h-[85vh] overflow-y-auto transform scale-95">
+                
+                <button onclick="closeModal('blessingsModal')" class="absolute top-3 right-3 w-8 h-8 bg-emeraldMain text-goldLight rounded-full flex items-center justify-center hover:bg-maroonMain transition shadow z-10">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+
+                <div class="text-center mb-3">
+                    <div class="font-arabic text-2xl gold-text-gradient font-bold">جدار الدعوات</div>
+                    <h3 class="text-lg font-bold text-emeraldDark font-bengali">শুভকামনা বোর্ড</h3>
+                    <p class="text-xs text-gray-600 font-bengali">অতিথিদের দো'আ ও আন্তরিক বার্তা</p>
+                </div>
+
+                <!-- Add Quick Blessing Input -->
+                <div class="mb-4 bg-cardCream p-3 rounded-xl border border-goldMain/40 shadow-sm">
+                    <input type="text" id="blessingAuthor" placeholder="আপনার নাম" class="w-full px-2.5 py-1.5 text-xs bg-white border border-goldMain/30 rounded mb-2 font-bengali focus:outline-none">
+                    <textarea id="blessingText" rows="2" placeholder="বর-কনের জন্য আপনার ভালোবাসাময় দো'আ লিখুন..." class="w-full px-2.5 py-1.5 text-xs bg-white border border-goldMain/30 rounded font-bengali focus:outline-none"></textarea>
+                    <button onclick="addBlessing()" class="mt-2 w-full bg-emeraldMain hover:bg-emeraldDark text-goldLight text-xs py-1.5 rounded-lg font-bold font-bengali flex items-center justify-center gap-1 shadow">
+                        <i class="fa-solid fa-heart text-goldMain text-xs"></i> দো'আ পাঠান
+                    </button>
+                </div>
+
+                <!-- Scrolling List of Prayers/Blessings -->
+                <div id="blessingsList" class="space-y-2.5 max-h-56 overflow-y-auto pr-1">
+                    <div class="text-center text-xs text-gray-400 font-bengali py-4">দো'আসমূহ লোড হচ্ছে...</div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Background Audio Element -->
+    <audio id="bgAudio" loop preload="auto">
+        <source src="bg.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Target Wedding Date
+        const weddingDate = new Date("May 24, 2028 13:30:00").getTime();
+        let isAudioPlaying = false;
+
+        // 🔴১. আপনার WhatsApp নম্বর
+        const myPhoneNumber = "8801627280262"; 
+
+        // 🔴২. আপনার Google Web App URL
+        const googleSheetScriptUrl = "https://script.google.com/macros/s/AKfycby-N8vBvcKdq6AxiHnph6gnh3w-bM2hy89nIZFMcOgwM5cc4k6UsXH8MzIZjIT7vnTs/exec"; 
+
+        function openEnvelope() {
+            const envelope = document.getElementById('interactiveEnvelope');
+            const envelopeScreen = document.getElementById('envelopeScreen');
+            const dashboardScreen = document.getElementById('dashboardScreen');
+
+            envelope.classList.add('open');
+
+            try {
+                const audio = document.getElementById('bgAudio');
+                audio.play().then(() => {
+                    isAudioPlaying = true;
+                    updateAudioIcon();
+                }).catch(e => console.log('Audio playback waiting for gesture'));
+            } catch(e) {}
+
+            setTimeout(() => {
+                envelopeScreen.classList.add('opacity-0', 'scale-105');
+                setTimeout(() => {
+                    envelopeScreen.style.display = 'none';
+                    dashboardScreen.classList.remove('hidden');
+                    setTimeout(() => {
+                        dashboardScreen.classList.remove('opacity-0');
+                    }, 50);
+                }, 500);
+            }, 800);
+        }
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const difference = weddingDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                document.getElementById('timerDays').innerText = days.toString().padStart(2, '0');
+                document.getElementById('timerHours').innerText = hours.toString().padStart(2, '0');
+                document.getElementById('timerMinutes').innerText = minutes.toString().padStart(2, '0');
+                document.getElementById('timerSeconds').innerText = seconds.toString().padStart(2, '0');
+            } else {
+                document.getElementById('timerDays').innerText = "00";
+                document.getElementById('timerHours').innerText = "00";
+                document.getElementById('timerMinutes').innerText = "00";
+                document.getElementById('timerSeconds').innerText = "00";
+            }
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (!modal) return;
+            
+            modal.classList.remove('pointer-events-none');
+            modal.classList.remove('opacity-0');
+            modal.classList.add('opacity-100');
+            
+            const modalContent = modal.querySelector('.modal-content');
+            if (modalContent) {
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }
+
+            // শুভকামনা বোর্ড ওপেন হলে শিট থেকে বার্তা লোড করবে
+            if (modalId === 'blessingsModal') {
+                loadBlessings();
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (!modal) return;
+
+            const modalContent = modal.querySelector('.modal-content');
+            if (modalContent) {
+                modalContent.classList.remove('scale-100');
+                modalContent.classList.add('scale-95');
+            }
+
+            modal.classList.remove('opacity-100');
+            modal.classList.add('opacity-0');
+            setTimeout(() => {
+                modal.classList.add('pointer-events-none');
+            }, 300);
+        }
+
+        function toggleAudio() {
+            const audio = document.getElementById('bgAudio');
+            if (isAudioPlaying) {
+                audio.pause();
+                isAudioPlaying = false;
+            } else {
+                audio.play().catch(e => console.log('Audio error:', e));
+                isAudioPlaying = true;
+            }
+            updateAudioIcon();
+        }
+
+        function updateAudioIcon() {
+            const icon = document.getElementById('audioIcon');
+            if (isAudioPlaying) {
+                icon.className = 'fas fa-volume-high text-base text-goldMain animate-pulse';
+            } else {
+                icon.className = 'fas fa-volume-xmark text-base text-goldMain';
+            }
+        }
+
+        function handleRSVPSubmit(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('guestName').value.trim();
+            const count = document.getElementById('guestCount').value;
+            const status = document.querySelector('input[name="attendance"]:checked').value;
+            const prayer = document.getElementById('guestPrayer').value.trim();
+
+            if (googleSheetScriptUrl) {
+                const queryParams = `?name=${encodeURIComponent(name)}&count=${encodeURIComponent(count)}&status=${encodeURIComponent(status)}&prayer=${encodeURIComponent(prayer)}`;
+                const img = new Image();
+                img.src = googleSheetScriptUrl + queryParams;
+            }
+
+            const textMessage = `السلام عليكم,\nআমি বিয়ের আমন্ত্রণের উত্তর দিচ্ছি:\n\n👤 নাম: ${name}\n👥 মোট অতিথি: ${count} জন\n📌 স্থিতি: ${status}\n💬 দো'আ/বার্তা: ${prayer || 'নেই'}`;
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=${myPhoneNumber}&text=${encodeURIComponent(textMessage)}`;
+
+            document.getElementById('rsvpForm').classList.add('hidden');
+            document.getElementById('rsvpSuccessMsg').classList.remove('hidden');
+
+            setTimeout(() => {
+                window.location.href = whatsappUrl;
+            }, 1000);
+        }
+
+        // গুগল শিট থেকে শুভকামনা লোড করা
+        function loadBlessings() {
+            if (!googleSheetScriptUrl) return;
+
+            fetch(googleSheetScriptUrl + "?action=getBlessings")
+                .then(res => res.json())
+                .then(data => {
+                    const list = document.getElementById('blessingsList');
+                    list.innerHTML = '';
+
+                    if (!data || data.length === 0) {
+                        list.innerHTML = '<div class="text-center text-xs text-gray-500 font-bengali py-4">এখনো কোনো দো\'আ পোস্ট করা হয়নি। প্রথম দো\'আটি আপনি লিখুন!</div>';
+                        return;
+                    }
+
+                    data.forEach(item => {
+                        const blessingCard = document.createElement('div');
+                        blessingCard.className = "p-3 bg-cardCream rounded-xl border-l-4 border-emeraldMain text-xs font-bengali shadow-xs mb-2.5";
+                        blessingCard.innerHTML = `
+                            <div class="flex justify-between items-center text-emeraldMain font-bold mb-0.5">
+                                <span>${escapeHtml(item.author)}</span>
+                            </div>
+                            <p class="text-gray-700">${escapeHtml(item.text)}</p>
+                        `;
+                        list.appendChild(blessingCard);
+                    });
+                })
+                .catch(err => console.log('Blessings Load Error:', err));
+        }
+
+        // নতুন শুভকামনা পোস্ট করা ও শিটে পাঠানো
+        function addBlessing() {
+            const authorInput = document.getElementById('blessingAuthor');
+            const textInput = document.getElementById('blessingText');
+            const author = authorInput.value.trim();
+            const text = textInput.value.trim();
+
+            if (!author || !text) {
+                alert("অনুগ্রহ করে আপনার নাম এবং বার্তা উভয়ই লিখুন।");
+                return;
+            }
+
+            const list = document.getElementById('blessingsList');
+            const newBlessing = document.createElement('div');
+            newBlessing.className = "p-3 bg-cardCream rounded-xl border-l-4 border-emeraldMain text-xs font-bengali shadow-xs transform transition duration-300 scale-95 opacity-0 mb-2.5";
+            
+            newBlessing.innerHTML = `
+                <div class="flex justify-between items-center text-emeraldMain font-bold mb-0.5">
+                    <span>${escapeHtml(author)}</span>
+                    <span class="text-[9px] text-gray-400">এখনই</span>
+                </div>
+                <p class="text-gray-700">${escapeHtml(text)}</p>
+            `;
+
+            list.insertBefore(newBlessing, list.firstChild);
+
+            setTimeout(() => {
+                newBlessing.classList.remove('scale-95', 'opacity-0');
+            }, 50);
+
+            // গুগল শিটে পোস্ট পাঠানো
+            if (googleSheetScriptUrl) {
+                const queryParams = `?action=addBlessing&author=${encodeURIComponent(author)}&text=${encodeURIComponent(text)}`;
+                const img = new Image();
+                img.src = googleSheetScriptUrl + queryParams;
+            }
+
+            authorInput.value = '';
+            textInput.value = '';
+        }
+
+        function escapeHtml(string) {
+            return String(string).replace(/[&<>"']/g, function(s) {
+                return {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#39;'
+                }[s];
+            });
+        }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal-backdrop')) {
+                closeModal(event.target.id);
+            }
+        }
+    </script>
+</body>
+</html>
